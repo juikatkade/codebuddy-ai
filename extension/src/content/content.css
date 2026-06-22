@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset scoped to our shadow DOM */
+:host {
+  all: initial;
+}

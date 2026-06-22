@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "CodeBuddy AI",
+  "version": "1.0.0",
+  "description": "Smart Coding Companion for Competitive Programmers",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "options_ui": {
+    "page": "index.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "src/background/background.ts",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "identity",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://api.codebuddy.ai/*",
+    "https://generativelanguage.googleapis.com/*",
+    "http://localhost:3000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://leetcode.com/*",
+        "*://codeforces.com/*",
+        "*://*.codechef.com/*",
+        "*://atcoder.jp/*",
+        "*://*.hackerrank.com/*",
+        "*://*.geeksforgeeks.org/*"
+      ],
+      "js": ["src/content/index.tsx"]
+    }
+  ]
+}
