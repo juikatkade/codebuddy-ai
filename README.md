@@ -88,7 +88,7 @@ Receive browser notifications for:
 
 ### Install from Chrome Web Store
 
-👉 **YOUR_CHROME_WEB_STORE_LINK**
+👉 **https://chromewebstore.google.com/detail/codebuddy-ai/onfcejmbfjpfkljjlddmcjaojldbhnfo?pli=1**
 
 ---
 
