@@ -752,7 +752,7 @@ export default function ContentApp() {
       const { title, description } = extractProblemDetails();
       
       const prompt = `
-You are LeetCoach AI, an elite coding interview coach.
+You are Code Buddy, an elite coding interview coach.
 Your job is to guide the user through the LeetCode problem "${title}".
 
 Here is the problem content:
@@ -769,7 +769,7 @@ Follow these constraints strictly for each level:
 Return the response ONLY as a JSON object with the keys "level1", "level2", "level3", "level4", and "level5". Do not include any markdown formatting, backticks, or extra text.
 `;
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${localApiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${localApiKey}`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -788,6 +788,12 @@ Return the response ONLY as a JSON object with the keys "level1", "level2", "lev
       });
 
       if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error("Rate limit exceeded. Please wait a moment before requesting more hints. (Gemini API 429)");
+        }
+        if (response.status === 503) {
+          throw new Error("Gemini service is temporarily unavailable. Please try again later. (Gemini API 503)");
+        }
         throw new Error(`Gemini API returned status ${response.status}`);
       }
 
@@ -863,7 +869,7 @@ Return the response ONLY as a JSON object with the keys "level1", "level2", "lev
     setSettingsValidationStatus('validating');
 
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${settingsApiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${settingsApiKey}`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -1054,7 +1060,7 @@ Return the response ONLY as a JSON object with the keys "level1", "level2", "lev
             className="flex items-center gap-2 bg-dark-800 hover:bg-dark-750 text-gray-200 px-3 py-2 rounded-md shadow-md transition-colors border border-dark-700 cursor-grab active:cursor-grabbing"
           >
             <Sparkles className="text-primary-500" size={16} />
-            <span className="font-semibold text-xs tracking-wider">LeetCoach AI</span>
+            <span className="font-semibold text-xs tracking-wider">Code Buddy</span>
             <div className="flex items-center gap-1">
               {currentProblemSlug && (
                 <span className="bg-primary-900/40 text-[10px] px-2 py-0.5 rounded-full font-mono font-medium border border-primary-500/20 text-primary-300" title="Current Problem Time">
@@ -1078,7 +1084,7 @@ Return the response ONLY as a JSON object with the keys "level1", "level2", "lev
             <div className="flex items-center gap-2">
               <GripHorizontal className="text-gray-600 hover:text-gray-400" size={16} />
               <Sparkles className="text-primary-500" size={16} />
-              <h2 className="font-bold text-sm tracking-wide text-gray-100">LeetCoach AI</h2>
+              <h2 className="font-bold text-sm tracking-wide text-gray-100">Code Buddy</h2>
             </div>
             
             <div className="flex items-center gap-1">

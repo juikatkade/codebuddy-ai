@@ -1,0 +1,8 @@
+# Query: leetcoach AI
+
+3 results - 1 file
+
+extension\src\content\ContentApp.tsx:
+  635: You are LeetCoach AI, an elite coding interview coach.
+  915:             <span className="font-semibold text-xs tracking-wider">LeetCoach</span>
+  930:               <h2 className="font-bold text-sm tracking-wide text-gray-100">LeetCoach AI</h2>
